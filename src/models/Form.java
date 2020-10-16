@@ -1,6 +1,7 @@
 package models;
 
 import mesmaths.geometrie.base.Vecteur;
+import models.enums.Color;
 
 /**
  * class qui represente une forme geometrique
@@ -22,5 +23,12 @@ public abstract class Form {
      */
     public abstract double mass();
 
+    /**
+     *
+     * @param xAxis :
+     * @param yAxis :
+     * @param width :
+     * @param height :
+     */
     public abstract void collision(double xAxis, double yAxis, double width, double height);
 }

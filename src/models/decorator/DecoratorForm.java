@@ -1,6 +1,6 @@
 package models.decorator;
 import mesmaths.geometrie.base.Vecteur;
-import models.Color;
+import models.enums.Color;
 import models.Form;
 
 

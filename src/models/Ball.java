@@ -2,6 +2,8 @@ package models;
 
 import mesmaths.geometrie.base.Geop;
 import mesmaths.geometrie.base.Vecteur;
+import models.enums.Color;
+
 import java.util.Objects;
 
 /**

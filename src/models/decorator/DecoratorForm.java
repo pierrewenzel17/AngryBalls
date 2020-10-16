@@ -1,7 +1,8 @@
 package models.decorator;
 import mesmaths.geometrie.base.Vecteur;
+import models.Color;
 import models.Form;
-import org.w3c.dom.css.RGBColor;
+
 
 public abstract class DecoratorForm extends Form {
 
@@ -17,7 +18,7 @@ public abstract class DecoratorForm extends Form {
     }
 
     @Override
-    public RGBColor getColor() {
+    public Color getColor() {
         return this._decoratedFrom.getColor();
     }
 
@@ -34,5 +35,10 @@ public abstract class DecoratorForm extends Form {
     @Override
     public Vecteur getAcceleration() {
         return this._decoratedFrom.getAcceleration();
+    }
+
+    @Override
+    public double mass() {
+        return this._decoratedFrom.mass();
     }
 }

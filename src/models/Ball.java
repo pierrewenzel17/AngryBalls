@@ -2,7 +2,6 @@ package models;
 
 import mesmaths.geometrie.base.Geop;
 import mesmaths.geometrie.base.Vecteur;
-import org.w3c.dom.css.RGBColor;
 import java.util.Objects;
 
 /**
@@ -11,14 +10,14 @@ import java.util.Objects;
 public class Ball extends Form {
 
     private final double _radius; // /!\ le final dois être enlever en cas de setter
-    private final RGBColor _color;
+    private final Color _color;
     private final Vecteur _position;
     private final Vecteur _speed;
     private final Vecteur _acceleration;
 
     public static final double DENSITY = 1;
 
-    public Ball(double _radius, RGBColor _color, Vecteur _position, Vecteur _speed, Vecteur _acceleration) {
+    public Ball(double _radius, Color _color, Vecteur _position, Vecteur _speed, Vecteur _acceleration) {
         this._radius = _radius;
         this._color = _color;
         this._position = _position;
@@ -26,7 +25,7 @@ public class Ball extends Form {
         this._acceleration = _acceleration;
     }
 
-    public Ball(double _radius, RGBColor _color) {
+    public Ball(double _radius, Color _color) {
         this(_radius, _color, new Vecteur(), new Vecteur(), new Vecteur());
     }
 
@@ -36,7 +35,7 @@ public class Ball extends Form {
     }
 
     @Override
-    public RGBColor getColor() {
+    public Color getColor() {
         return this._color;
     }
 
@@ -59,6 +58,9 @@ public class Ball extends Form {
     public double mass() {
         return DENSITY * Geop.volumeSphère(_radius);
     }
+
+    @Override
+    public void collision(double xAxis, double yAxis, double width, double height) {}
 
     @Override
     public boolean equals(Object o) {

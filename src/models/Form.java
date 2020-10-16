@@ -1,7 +1,6 @@
 package models;
 
 import mesmaths.geometrie.base.Vecteur;
-import org.w3c.dom.css.RGBColor;
 
 /**
  * class qui represente une forme geometrique
@@ -9,7 +8,7 @@ import org.w3c.dom.css.RGBColor;
 public abstract class Form {
     public abstract double getRadius();
     //public abstract void setRadius(double radius);
-    public abstract RGBColor getColor();
+    public abstract Color getColor();
     //public abstract void setColor(RGBColor color);
     public abstract Vecteur getPosition();
     //public abstract void setPosition(Vecteur position);
@@ -22,4 +21,6 @@ public abstract class Form {
      * @return la masse de cette bille (floattant)
      */
     public abstract double mass();
+
+    public abstract void collision(double xAxis, double yAxis, double width, double height);
 }

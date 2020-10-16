@@ -3,6 +3,9 @@ package models;
 import mesmaths.geometrie.base.Vecteur;
 import org.w3c.dom.css.RGBColor;
 
+/**
+ * class qui represente une forme geometrique
+ */
 public abstract class Form {
     public abstract double getRadius();
     //public abstract void setRadius(double radius);

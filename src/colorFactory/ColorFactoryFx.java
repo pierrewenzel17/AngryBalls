@@ -1,18 +1,15 @@
 package colorFactory;
 
 import javafx.scene.paint.Color;
-import models.enums.ColorForm;
-import java.util.HashMap;
-
+/**
+ * Cette class dois être instancié si on utilise JavaFx
+ * Elle transforme les couleurs de ColorForm en Color JavaFx
+ */
 public final class ColorFactoryFx extends ColorFactory<Color> {
-
+    /**
+     * Contructeur pour javaFx
+     */
     public ColorFactoryFx() {
-        this._colorMap = new HashMap<>();
-        for(ColorForm c : ColorForm.values()) this._colorMap.put(c,Color.valueOf(c.value));
-    }
-
-    @Override
-    public Color MapColor(ColorForm colorForm) {
-        return _colorMap.get(colorForm);
+        super(Color::valueOf);
     }
 }

@@ -1,6 +1,5 @@
 package colorFactory;
 
-import javafx.scene.paint.Color;
 import models.enums.ColorForm;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +19,9 @@ class ColorFactoryTest {
 
     @Test
     void mapColor() {
-        ColorFactory<Color> colorFactory = new ColorFactoryFx();
-        assertEquals(Color.valueOf("#D58F1C"), colorFactory.MapColor(ColorForm.BEIGE));
+        var colorFactoryFx = new ColorFactoryFx();
+        var colorFactoryAwt = new ColorFactoryAwt();
+        assertEquals(javafx.scene.paint.Color.valueOf("#D58F1C"), colorFactoryFx.MapColor(ColorForm.BEIGE));
+        assertEquals(java.awt.Color.getColor("#D58F1C"), colorFactoryAwt.MapColor(ColorForm.BEIGE));
     }
 }

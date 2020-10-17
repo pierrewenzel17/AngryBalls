@@ -1,5 +1,9 @@
 package models.enums;
 
+/**
+ * Enumération des couleur possible pour le back-end
+ * @author Pierre Wenzel
+ */
 public enum ColorForm {
 
     WHITE("#FFFFFF", 255, 255,255),
@@ -17,6 +21,13 @@ public enum ColorForm {
     public final int green;
     public final int blue;
 
+    /**
+     * Constructeur
+     * @param value : code couleur au format #HHHHHH
+     * @param red : rouge de RGB, valeur de 0 -> 255
+     * @param green : vert de RGB, valeur de 0 -> 255
+     * @param blue : blue de RGB, valeur de 0 -> 255
+     */
     ColorForm(String value, int red, int green, int blue) {
         this.value = value;
         this.red = red;

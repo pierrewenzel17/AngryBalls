@@ -1,6 +1,6 @@
 package models.decorator;
 import mesmaths.geometrie.base.Vecteur;
-import models.enums.Color;
+import models.enums.ColorForm;
 import models.Form;
 
 
@@ -18,7 +18,7 @@ public abstract class DecoratorForm extends Form {
     }
 
     @Override
-    public Color getColor() {
+    public ColorForm getColor() {
         return this._decoratedFrom.getColor();
     }
 

@@ -1,7 +1,7 @@
 package models;
 
 import mesmaths.geometrie.base.Vecteur;
-import models.enums.Color;
+import models.enums.ColorForm;
 
 /**
  * class qui represente une forme geometrique
@@ -9,7 +9,7 @@ import models.enums.Color;
 public abstract class Form {
     public abstract double getRadius();
     //public abstract void setRadius(double radius);
-    public abstract Color getColor();
+    public abstract ColorForm getColor();
     //public abstract void setColor(RGBColor color);
     public abstract Vecteur getPosition();
     //public abstract void setPosition(Vecteur position);

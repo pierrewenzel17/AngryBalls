@@ -2,7 +2,7 @@ package models;
 
 import mesmaths.geometrie.base.Geop;
 import mesmaths.geometrie.base.Vecteur;
-import models.enums.Color;
+import models.enums.ColorForm;
 
 import java.util.Objects;
 
@@ -12,23 +12,23 @@ import java.util.Objects;
 public class Ball extends Form {
 
     private final double _radius; // /!\ le final dois être enlever en cas de setter
-    private final Color _color;
+    private final ColorForm _colorForm;
     private final Vecteur _position;
     private final Vecteur _speed;
     private final Vecteur _acceleration;
 
     public static final double DENSITY = 1;
 
-    public Ball(double _radius, Color _color, Vecteur _position, Vecteur _speed, Vecteur _acceleration) {
+    public Ball(double _radius, ColorForm _colorForm, Vecteur _position, Vecteur _speed, Vecteur _acceleration) {
         this._radius = _radius;
-        this._color = _color;
+        this._colorForm = _colorForm;
         this._position = _position;
         this._speed = _speed;
         this._acceleration = _acceleration;
     }
 
-    public Ball(double _radius, Color _color) {
-        this(_radius, _color, new Vecteur(), new Vecteur(), new Vecteur());
+    public Ball(double _radius, ColorForm _colorForm) {
+        this(_radius, _colorForm, new Vecteur(), new Vecteur(), new Vecteur());
     }
 
     @Override
@@ -37,8 +37,8 @@ public class Ball extends Form {
     }
 
     @Override
-    public Color getColor() {
-        return this._color;
+    public ColorForm getColor() {
+        return this._colorForm;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Ball extends Form {
         if (!(o instanceof Ball)) return false;
         Ball ball = (Ball) o;
         return Double.compare(ball._radius, _radius) == 0 &&
-                _color.equals(ball._color) &&
+                _colorForm.equals(ball._colorForm) &&
                 _position.equals(ball._position) &&
                 _speed.equals(ball._speed) &&
                 _acceleration.equals(ball._acceleration);
@@ -78,14 +78,14 @@ public class Ball extends Form {
 
     @Override
     public int hashCode() {
-        return Objects.hash(_radius, _color, _position, _speed, _acceleration);
+        return Objects.hash(_radius, _colorForm, _position, _speed, _acceleration);
     }
 
     @Override
     public String toString() {
         return "Ball{" +
                 "_radius=" + _radius +
-                ", _color=" + _color +
+                ", _color=" + _colorForm +
                 ", _position=" + _position +
                 ", _speed=" + _speed +
                 ", _acceleration=" + _acceleration +

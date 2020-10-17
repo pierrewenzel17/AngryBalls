@@ -1,6 +1,6 @@
 package models;
 
-import models.enums.Color;
+import models.enums.ColorForm;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,12 +17,12 @@ class FormTest {
     @BeforeEach
     void setUp() {
         _forms = new ArrayList<>();
-        _forms.add(new Ball(2, Color.RED));
-        _forms.add(new Ball(2, Color.YELLOW));
-        _forms.add(new Ball(2, Color.GREEN));
-        _forms.add(new Ball(2, Color.BLUE));
-        _forms.add(new Ball(2, Color.WHITE));
-        _forms.add(new Ball(2, Color.BLACK));
+        _forms.add(new Ball(2, ColorForm.RED));
+        _forms.add(new Ball(2, ColorForm.YELLOW));
+        _forms.add(new Ball(2, ColorForm.GREEN));
+        _forms.add(new Ball(2, ColorForm.BLUE));
+        _forms.add(new Ball(2, ColorForm.WHITE));
+        _forms.add(new Ball(2, ColorForm.BLACK));
     }
 
     @AfterEach

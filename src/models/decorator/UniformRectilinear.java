@@ -12,4 +12,9 @@ public final class UniformRectilinear extends DecoratorForm {
     public void collision(double xAxis, double yAxis, double width, double height) {
 
     }
+
+    @Override
+    public String toString() {
+        return "UniformRectilinear{" + this._decoratedFrom + "}";
+    }
 }

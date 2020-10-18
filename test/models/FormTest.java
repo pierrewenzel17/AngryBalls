@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FormTest {
+final class FormTest {
 
     private List<Form> _forms;
 

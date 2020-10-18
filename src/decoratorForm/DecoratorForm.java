@@ -1,4 +1,4 @@
-package models.decorator;
+package decoratorForm;
 import mesmaths.geometrie.base.Vecteur;
 import models.enums.ColorForm;
 import models.Form;

@@ -1,7 +1,6 @@
-package colorFactory;
+package factoryColor;
 
 import java.awt.Color;
-
 /**
  * Cette class doit être instancié si on utilise awt
  * Elle transforme les couleurs de ColorForm en Color awt

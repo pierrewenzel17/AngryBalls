@@ -1,4 +1,4 @@
-package models.decorator;
+package decoratorForm;
 
 import mesmaths.cinematique.Collisions;
 import models.Form;

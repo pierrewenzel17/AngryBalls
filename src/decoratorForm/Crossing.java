@@ -1,10 +1,10 @@
-package models.decorator;
+package decoratorForm;
 
 import models.Form;
 
-public final class Pilot extends DecoratorForm {
+public final class Crossing extends DecoratorForm {
 
-    public Pilot(Form decoratedFrom) {
+    public Crossing(Form decoratedFrom) {
         super(decoratedFrom);
     }
 

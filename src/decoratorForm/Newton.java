@@ -1,10 +1,10 @@
-package models.decorator;
+package decoratorForm;
 
 import models.Form;
 
-public final class AirFriction extends DecoratorForm {
+public final class Newton extends DecoratorForm {
 
-    public AirFriction(Form decoratedFrom) {
+    public Newton(Form decoratedFrom) {
         super(decoratedFrom);
     }
 

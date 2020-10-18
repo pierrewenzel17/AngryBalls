@@ -1,4 +1,4 @@
-package colorFactory;
+package factoryColor;
 
 import javafx.scene.paint.Color;
 /**

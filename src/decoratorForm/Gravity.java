@@ -1,10 +1,10 @@
-package models.decorator;
+package decoratorForm;
 
 import models.Form;
 
-public final class Blocked extends DecoratorForm {
+public final class Gravity extends DecoratorForm {
 
-    public Blocked(Form decoratedFrom) {
+    public Gravity(Form decoratedFrom) {
         super(decoratedFrom);
     }
 

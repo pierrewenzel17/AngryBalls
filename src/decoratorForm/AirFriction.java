@@ -1,10 +1,10 @@
-package models.decorator;
+package decoratorForm;
 
 import models.Form;
 
-public final class Gravity extends DecoratorForm {
+public final class AirFriction extends DecoratorForm {
 
-    public Gravity(Form decoratedFrom) {
+    public AirFriction(Form decoratedFrom) {
         super(decoratedFrom);
     }
 

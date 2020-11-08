@@ -1,10 +1,10 @@
-package com.ufr.mim.angryballs.models.enums;
+package com.ufr.mim.angryballs.models;
 
 /**
  * Enumération des couleur possible pour le back-end
  * @author Pierre Wenzel
  */
-public enum ColorForm {
+public enum Color {
 
     WHITE(16777215),
     BLACK(0),
@@ -18,7 +18,7 @@ public enum ColorForm {
 
     private final int RGB;
 
-    ColorForm(int rgb) { this.RGB = 0xff000000 | rgb; }
+    Color(int rgb) { this.RGB = 0xff000000 | rgb; }
 
     public int getRGB() { return RGB; }
 

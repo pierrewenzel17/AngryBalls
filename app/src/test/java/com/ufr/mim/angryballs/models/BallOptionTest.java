@@ -1,10 +1,10 @@
-package com.ufr.mim.angryballs.decoratorForm;
+package com.ufr.mim.angryballs.models;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-final class DecoratorFormTest {
+final class BallOptionTest {
 
     @BeforeEach
     void setUp() {

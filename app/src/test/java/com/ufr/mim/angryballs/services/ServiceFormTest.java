@@ -1,10 +1,10 @@
 package com.ufr.mim.angryballs.services;
 
 import com.ufr.mim.angryballs.models.Ball;
-import com.ufr.mim.angryballs.models.Form;
-import com.ufr.mim.angryballs.models.enums.ColorForm;
-import com.ufr.mim.angryballs.views.draw.DrawFx;
-import com.ufr.mim.angryballs.views.draw.DrawVisitor;
+import com.ufr.mim.angryballs.models.IBall;
+import com.ufr.mim.angryballs.models.Color;
+import com.ufr.mim.angryballs.views.draw.DrawWithFx;
+import com.ufr.mim.angryballs.views.draw.IDrawVisitor;
 import javafx.scene.Group;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,14 +25,13 @@ class ServiceFormTest {
 
     @Test
     void drawForm() {
-        List<Form> forms = new ArrayList<>();
-        ServiceForm serviceForm = new ServiceForm();
+        List<IBall> forms = new ArrayList<>();
+        ServiceBall serviceForm = new ServiceBall();
 
-        forms.add(new Ball(2, ColorForm.BEIGE));
+        forms.add(new Ball(2, Color.BEIGE));
         Group group = new Group();
 
-        DrawFx g = (DrawFx) DrawVisitor.getInstance();
-        serviceForm.drawForm(g, group, forms);
+        //serviceForm.drawForm(g, group, forms);
         //serviceForm.drawForm(DrawVisitor.getInstance(), group, new Ball(3, ColorForm.BLUE));
     }
 }

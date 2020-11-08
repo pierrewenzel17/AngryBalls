@@ -18,19 +18,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.5.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>mesmaths</groupId>
-            <artifactId>mesmaths</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/mesmaths.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>15</version>
@@ -39,6 +26,13 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>15</version>
+        </dependency>
+        <dependency>
+            <groupId>mesmaths</groupId>
+            <artifactId>mesmaths</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/mesmaths.jar</systemPath>
         </dependency>
     </dependencies>
 

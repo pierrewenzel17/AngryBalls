@@ -1,7 +1,6 @@
 package com.ufr.mim.angryballs.models;
 
-import com.ufr.mim.angryballs.models.enums.ColorForm;
-import com.ufr.mim.angryballs.views.draw.DrawVisitor;
+import com.ufr.mim.angryballs.views.draw.IDrawVisitor;
 import mesmaths.geometrie.base.Geop;
 import mesmaths.geometrie.base.Vecteur;
 
@@ -10,17 +9,17 @@ import java.util.Objects;
 /**
  * Class qui représente une bille
  */
-public class Ball extends Form {
+public class Ball implements IBall {
 
-    private final double radius; // /!\ le final dois être enlever en cas de setter
-    private final ColorForm color;
+    private final double radius;
+    private final Color color;
     private final Vecteur position;
     private final Vecteur speed;
     private final Vecteur acceleration;
 
     public static final double DENSITY = 1;
 
-    public Ball(double radius, ColorForm color, final Vecteur position, final Vecteur speed,
+    public Ball(double radius, Color color, final Vecteur position, final Vecteur speed,
                 final Vecteur acceleration) {
         this.radius = radius;
         this.color = color;
@@ -29,7 +28,7 @@ public class Ball extends Form {
         this.acceleration = acceleration;
     }
 
-    public Ball(double radius, ColorForm color) {
+    public Ball(double radius, Color color) {
         this(radius, color, new Vecteur(), new Vecteur(), new Vecteur());
     }
 
@@ -39,7 +38,7 @@ public class Ball extends Form {
     }
 
     @Override
-    public ColorForm getColor() {
+    public Color getColor() {
         return this.color;
     }
 
@@ -95,7 +94,7 @@ public class Ball extends Form {
     }
 
     @Override
-    public <GRAPHIC> void draw(final DrawVisitor<GRAPHIC> drawVisitor, GRAPHIC g) {
+    public <GRAPHIC> void draw(final IDrawVisitor<GRAPHIC> drawVisitor, GRAPHIC g) {
         drawVisitor.draw(this, g);
     }
 }

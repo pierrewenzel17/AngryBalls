@@ -1,12 +1,10 @@
 package com.ufr.mim.angryballs.services;
 
-import com.ufr.mim.angryballs.views.draw.GraphicConfigChooser;
-
 public final class ServiceConstant {
-    /**
-     * a changer si on veux un autre front
-     */
-    public static final GraphicConfigChooser GRAPHIC_CONFIG_CHOOSER = GraphicConfigChooser.JAVAFX;
+
+    public static final String FXML_FILE = "fxml";
+
+    public static final String FILE_SEPARATOR = "/";
 
     private ServiceConstant() throws IllegalAccessException {
         throw new IllegalAccessException("not instantiable");

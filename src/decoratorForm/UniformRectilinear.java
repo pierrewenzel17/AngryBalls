@@ -15,6 +15,6 @@ public final class UniformRectilinear extends DecoratorForm {
 
     @Override
     public String toString() {
-        return "UniformRectilinear{" + this._decoratedFrom + "}";
+        return "UniformRectilinear{" + this.decoratedForm + "}";
     }
 }

@@ -2,12 +2,9 @@ package decoratorForm;
 
 import models.Ball;
 import models.Form;
-import models.enums.ColorForm;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 final class DecoratorFormTest {
 
@@ -21,7 +18,7 @@ final class DecoratorFormTest {
 
     @Test
     void init() {
-        Form ballWithOption = new UniformRectilinear(new Bounce(new Ball(2, ColorForm.BLACK)));
-        System.out.println(ballWithOption);
+        //Form ballWithOption = new UniformRectilinear(new Bounce(new Ball(2, String.BLACK)));
+        //System.out.println(ballWithOption);
     }
 }

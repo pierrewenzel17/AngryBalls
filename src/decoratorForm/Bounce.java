@@ -21,6 +21,6 @@ public final class Bounce extends DecoratorForm {
 
     @Override
     public String toString() {
-        return "Bounce{" + this._decoratedFrom + "}";
+        return "Bounce{" + this.decoratedForm + "}";
     }
 }

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +17,16 @@ final class FormTest {
 
     @BeforeEach
     void setUp() {
+        /*
         _forms = new ArrayList<>();
-        _forms.add(new Ball(2, ColorForm.RED));
-        _forms.add(new Ball(2, ColorForm.YELLOW));
-        _forms.add(new Ball(2, ColorForm.GREEN));
-        _forms.add(new Ball(2, ColorForm.BLUE));
-        _forms.add(new Ball(2, ColorForm.WHITE));
-        _forms.add(new Ball(2, ColorForm.BLACK));
+        _forms.add(new Ball(2, String.RED));
+        _forms.add(new Ball(2, String.YELLOW));
+        _forms.add(new Ball(2, String.GREEN));
+        _forms.add(new Ball(2, String.BLUE));
+        _forms.add(new Ball(2, String.WHITE));
+        _forms.add(new Ball(2, String.BLACK));
+
+         */
     }
 
     @AfterEach

@@ -1,44 +1,50 @@
 package decoratorForm;
 import mesmaths.geometrie.base.Vecteur;
-import models.enums.ColorForm;
 import models.Form;
+import models.enums.ColorForm;
+import views.draw.DrawVisitor;
 
 
 public abstract class DecoratorForm extends Form {
 
-    protected Form _decoratedFrom;
+    protected Form decoratedForm;
 
-    public DecoratorForm(Form decoratedFrom) {
-        this._decoratedFrom = decoratedFrom;
+    protected DecoratorForm(Form decoratedForm) {
+        this.decoratedForm = decoratedForm;
     }
 
     @Override
     public double getRadius() {
-        return this._decoratedFrom.getRadius();
+        return this.decoratedForm.getRadius();
     }
 
     @Override
     public ColorForm getColor() {
-        return this._decoratedFrom.getColor();
+        return this.decoratedForm.getColor();
     }
 
     @Override
     public Vecteur getPosition() {
-        return this._decoratedFrom.getPosition();
+        return this.decoratedForm.getPosition();
     }
 
     @Override
     public Vecteur getSpeed() {
-        return this._decoratedFrom.getSpeed();
+        return this.decoratedForm.getSpeed();
     }
 
     @Override
     public Vecteur getAcceleration() {
-        return this._decoratedFrom.getAcceleration();
+        return this.decoratedForm.getAcceleration();
     }
 
     @Override
     public double mass() {
-        return this._decoratedFrom.mass();
+        return this.decoratedForm.mass();
+    }
+
+    @Override
+    public <GRAPHIC> void draw(DrawVisitor<GRAPHIC> drawVisitor, GRAPHIC g) {
+        this.decoratedForm.draw(drawVisitor, g);
     }
 }

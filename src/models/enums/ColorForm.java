@@ -6,32 +6,40 @@ package models.enums;
  */
 public enum ColorForm {
 
-    WHITE("#FFFFFF", 255, 255,255),
-    BLACK("#000000", 0,0,0),
-    YELLOW("#FFF300", 255, 243, 0),
-    BLUE("#00D8FF", 0, 216, 255),
-    RED("#F33535", 243, 53,53),
-    PURPLE("#B735F3", 183, 53, 243),
-    ORANGE("#FF4D00", 255,77,0),
-    GREEN("#1CD52D", 28,213,45),
-    BEIGE("#D58F1C", 213,143, 28);
+    WHITE(16777215),
+    BLACK(0),
+    YELLOW(16773888),
+    BLUE(55551),
+    RED(15938869),
+    PURPLE( 12006899),
+    ORANGE(16731392),
+    GREEN(1889581),
+    BEIGE( 13995804);
 
-    public final String value;
-    public final int red;
-    public final int green;
-    public final int blue;
+    private final int RGB;
 
-    /**
-     * Constructeur
-     * @param value : code couleur au format #HHHHHH
-     * @param red : rouge de RGB, valeur de 0 -> 255
-     * @param green : vert de RGB, valeur de 0 -> 255
-     * @param blue : blue de RGB, valeur de 0 -> 255
-     */
-    ColorForm(String value, int red, int green, int blue) {
-        this.value = value;
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
+    ColorForm(int rgb) { this.RGB = 0xff000000 | rgb; }
+
+    public int getRGB() { return RGB; }
+
+    public int getRed() { return (getRGB() >> 16) & 0xFF; }
+
+    public int getBlue() { return (getRGB()) & 0xFF; }
+
+    public int getGreen() { return (getRGB() >> 8) & 0xFF; }
+
+    public int getAlpha() { return (getRGB() >> 24) & 0xff; }
+
+    public String getHexadecimal() { return String.format( "#%02x%02x%02x", getRed(), getGreen(), getBlue()); }
+
+    @Override
+    public String toString() {
+        return "ColorForm{" +
+                "RGB=" + RGB +
+                "RED=" + getRed() +
+                "BLUE=" + getBlue() +
+                "GREEN=" + getGreen() +
+                "HEXADECIMAL=" + getHexadecimal() +
+                '}';
     }
 }

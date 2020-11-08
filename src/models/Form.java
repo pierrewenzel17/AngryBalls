@@ -6,7 +6,11 @@ import models.enums.ColorForm;
 /**
  * class qui represente une forme geometrique
  */
-public abstract class Form {
+public abstract class Form implements Drawable {
+    /**
+     * Getter du rayon
+     * @return le rayon de la forme
+     */
     public abstract double getRadius();
     //public abstract void setRadius(double radius);
     public abstract ColorForm getColor();
@@ -22,7 +26,6 @@ public abstract class Form {
      * @return la masse de cette bille (floattant)
      */
     public abstract double mass();
-
     /**
      *
      * @param xAxis :

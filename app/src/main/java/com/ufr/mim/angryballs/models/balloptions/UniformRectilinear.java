@@ -4,13 +4,8 @@ import com.ufr.mim.angryballs.models.IBall;
 
 public final class UniformRectilinear extends BallOption {
 
-    public UniformRectilinear(IBall ball) {
+    public UniformRectilinear(final IBall ball) {
         super(ball);
-    }
-
-    @Override
-    public void collision(double xAxis, double yAxis, double width, double height) {
-        //TODO
     }
 
     @Override

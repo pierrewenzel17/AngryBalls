@@ -4,12 +4,13 @@ import com.ufr.mim.angryballs.views.draw.IDrawVisitor;
 import mesmaths.geometrie.base.Geop;
 import mesmaths.geometrie.base.Vecteur;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
  * Class qui représente une bille
  */
-public class Ball implements IBall {
+public final class Ball implements IBall {
 
     private final double radius;
     private final Color color;
@@ -63,7 +64,10 @@ public class Ball implements IBall {
     }
 
     @Override
-    public void collision(double xAxis, double yAxis, double width, double height) {}
+    public void manageCollision(double xAxis, double yAxis, double width, double height) {}
+
+    @Override
+    public void manageAcceleration(List<IBall> balls) { this.getAcceleration().set(Vecteur.VECTEURNUL); }
 
     @Override
     public boolean equals(Object o) {

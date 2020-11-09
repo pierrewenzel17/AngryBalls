@@ -5,11 +5,13 @@ import com.ufr.mim.angryballs.models.Color;
 import com.ufr.mim.angryballs.views.draw.IDrawVisitor;
 import mesmaths.geometrie.base.Vecteur;
 
+import java.util.List;
+
 abstract class BallOption implements IBall {
 
     protected IBall ballWithOption;
 
-    protected BallOption(IBall ballWithOption) {
+    protected BallOption(final IBall ballWithOption) {
         this.ballWithOption = ballWithOption;
     }
 
@@ -42,6 +44,14 @@ abstract class BallOption implements IBall {
     public double mass() {
         return this.ballWithOption.mass();
     }
+
+    @Override
+    public void manageCollision(double xAxis, double yAxis, double width, double height) {
+        this.ballWithOption.manageCollision(xAxis, yAxis, width, height);
+    }
+
+    @Override
+    public void manageAcceleration(List<IBall> balls) { this.ballWithOption.manageAcceleration(balls); }
 
     @Override
     public <GRAPHIC> void draw(IDrawVisitor<GRAPHIC> drawVisitor, GRAPHIC g) {

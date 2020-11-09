@@ -1,6 +1,5 @@
 package com.ufr.mim.angryballs.models;
 
-import com.ufr.mim.angryballs.models.Color;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

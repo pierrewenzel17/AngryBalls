@@ -2,15 +2,22 @@ package com.ufr.mim.angryballs.models.balloptions;
 
 import com.ufr.mim.angryballs.models.IBall;
 
+import java.util.List;
+
+/**
+ * Classe qui muni une bille d'une attraction par les autres billes
+ * (attraction universelle due à la force de Newton)
+ */
 public final class Newton extends BallOption {
 
-    public Newton(IBall ball) {
+    public Newton(final IBall ball) {
         super(ball);
     }
 
     @Override
-    public void collision(double xAxis, double yAxis, double width, double height) {
-        //TODO
+    public void manageAcceleration(List<IBall> balls) {
+        super.manageAcceleration(balls);
+        //this.getAcceleration().ajoute(OutilsBille.gestionAccelerationNewton(this, balls));
     }
 
     @Override

@@ -14,12 +14,12 @@ final class BallOptionTest {
 
     @BeforeEach
     void setUp() {
-        this.redBall = new UniformRectilinear(new Bounce(new Ball(1, Color.RED)));
-        this.yellowBall = new Gravity(new AirFriction(new Bounce(new Ball(1, Color.YELLOW))), new Vecteur());
-        this.greenBall = new Newton(new AirFriction(new Bounce(new Ball(1, Color.GREEN))));
-        this.blueBall = new UniformRectilinear(new WallPass(new Ball(1, Color.BLUE)));
+        this.redBall = new Ball(1, Color.RED);
+        this.yellowBall = new Gravity(new AirFriction(new Ball(1, Color.YELLOW)), new Vecteur());
+        this.greenBall = new Newton(new AirFriction(new Ball(1, Color.GREEN)));
+        this.blueBall =  new WallPass(new Ball(1, Color.BLUE));
         this.blackBall = new Newton(new Blocked(new Ball(1, Color.BLACK)));
-        this.whiteBall = new Pilot(new UniformRectilinear(new Bounce(new Ball(1, Color.WHITE))));
+        this.whiteBall = new Pilot(new Ball(1, Color.WHITE));
     }
 
     @AfterEach

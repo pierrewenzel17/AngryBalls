@@ -46,6 +46,11 @@ abstract class BallOption implements IBall {
     }
 
     @Override
+    public void move(double deltaT) {
+        this.ballWithOption.move(deltaT);
+    }
+
+    @Override
     public void manageCollision(double xAxis, double yAxis, double width, double height) {
         this.ballWithOption.manageCollision(xAxis, yAxis, width, height);
     }
@@ -57,4 +62,10 @@ abstract class BallOption implements IBall {
     public <GRAPHIC> void draw(IDrawVisitor<GRAPHIC> drawVisitor, GRAPHIC g) {
         this.ballWithOption.draw(drawVisitor, g);
     }
+
+    @Override
+    public int hashCode() {
+        return this.ballWithOption.hashCode();
+    }
 }
+

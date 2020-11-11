@@ -1,6 +1,8 @@
 package com.ufr.mim.angryballs.models;
 
 import com.ufr.mim.angryballs.views.draw.IDrawVisitor;
+import mesmaths.cinematique.Cinematique;
+import mesmaths.cinematique.Collisions;
 import mesmaths.geometrie.base.Geop;
 import mesmaths.geometrie.base.Vecteur;
 
@@ -64,10 +66,23 @@ public final class Ball implements IBall {
     }
 
     @Override
-    public void manageCollision(double xAxis, double yAxis, double width, double height) {}
+    public void move(double deltaT) {
+        Cinematique.mouvementUniformémentAccéléré( this.getPosition(), this.getSpeed(), this.getAcceleration(), deltaT);
+    }
+
+    @Override
+    public void manageCollision(double xAxis, double yAxis, double width, double height) {
+        Collisions.collisionBilleContourAvecRebond(this.getPosition(), this.getRadius(),
+                this.getSpeed(), xAxis, yAxis, width, height);
+    }
 
     @Override
     public void manageAcceleration(List<IBall> balls) { this.getAcceleration().set(Vecteur.VECTEURNUL); }
+
+    @Override
+    public <GRAPHIC> void draw(final IDrawVisitor<GRAPHIC> drawVisitor, GRAPHIC g) {
+        drawVisitor.draw(this, g);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -95,10 +110,5 @@ public final class Ball implements IBall {
                 ", speed=" + speed +
                 ", acceleration=" + acceleration +
                 '}';
-    }
-
-    @Override
-    public <GRAPHIC> void draw(final IDrawVisitor<GRAPHIC> drawVisitor, GRAPHIC g) {
-        drawVisitor.draw(this, g);
     }
 }

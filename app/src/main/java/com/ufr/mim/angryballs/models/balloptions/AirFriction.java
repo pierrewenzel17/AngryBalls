@@ -1,8 +1,9 @@
 package com.ufr.mim.angryballs.models.balloptions;
 
-import com.ufr.mim.angryballs.models.IBall;
+import com.ufr.mim.angryballs.models.Ball;
 import mesmaths.mecanique.MecaniquePoint;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -10,14 +11,14 @@ import java.util.List;
  */
 public final class AirFriction extends BallOption {
 
-    public AirFriction(final IBall ball) {
+    public AirFriction(final Ball ball) {
         super(ball);
     }
 
     @Override
-    public void manageAcceleration(List<IBall> balls) {
+    public void manageAcceleration(final Collection<Ball> balls) {
         super.manageAcceleration(balls);
-        this.getAcceleration().ajoute(MecaniquePoint.freinageFrottement(this.mass(), this.getSpeed()));
+        this.getAcceleration().ajoute(MecaniquePoint.freinageFrottement(this.getMass(), this.getSpeed()));
     }
 
     @Override

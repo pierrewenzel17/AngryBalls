@@ -1,17 +1,20 @@
 package com.ufr.mim.angryballs.models.balloptions;
 
-import com.ufr.mim.angryballs.models.IBall;
+import com.ufr.mim.angryballs.models.Ball;
 import com.ufr.mim.angryballs.models.Color;
 import com.ufr.mim.angryballs.views.draw.IDrawVisitor;
 import mesmaths.geometrie.base.Vecteur;
 
-import java.util.List;
+import java.util.Collection;
 
-abstract class BallOption implements IBall {
+/**
+ * Classe mère de toute les options que peu avoir une bille
+ */
+abstract class BallOption implements Ball {
 
-    protected IBall ballWithOption;
+    protected Ball ballWithOption;
 
-    protected BallOption(final IBall ballWithOption) {
+    protected BallOption(final Ball ballWithOption) {
         this.ballWithOption = ballWithOption;
     }
 
@@ -19,6 +22,9 @@ abstract class BallOption implements IBall {
     public double getRadius() {
         return this.ballWithOption.getRadius();
     }
+
+    @Override
+    public double getDensity() { return this.ballWithOption.getDensity(); }
 
     @Override
     public Color getColor() {
@@ -41,8 +47,8 @@ abstract class BallOption implements IBall {
     }
 
     @Override
-    public double mass() {
-        return this.ballWithOption.mass();
+    public double getMass() {
+        return this.ballWithOption.getMass();
     }
 
     @Override
@@ -56,11 +62,17 @@ abstract class BallOption implements IBall {
     }
 
     @Override
-    public void manageAcceleration(List<IBall> balls) { this.ballWithOption.manageAcceleration(balls); }
+    public void manageAcceleration(final Collection<Ball> balls) { this.ballWithOption.manageAcceleration(balls); }
 
     @Override
-    public <GRAPHIC> void draw(IDrawVisitor<GRAPHIC> drawVisitor, GRAPHIC g) {
-        this.ballWithOption.draw(drawVisitor, g);
+    public <G> void draw(IDrawVisitor<G> drawVisitor, G g) { this.ballWithOption.draw(drawVisitor, g); }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ball)) return false;
+        var ballOption = (BallOption) o;
+        return ballWithOption.equals(ballOption.ballWithOption);
     }
 
     @Override

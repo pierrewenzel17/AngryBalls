@@ -1,7 +1,7 @@
 package com.ufr.mim.angryballs.models;
 
 /**
- * Enumération des couleur possible pour le back-end
+ * Énumérations des couleurs possible pour le back-end
  * @author Pierre Wenzel
  */
 public enum Color {
@@ -16,11 +16,11 @@ public enum Color {
     GREEN(1889581),
     BEIGE( 13995804);
 
-    private final int RGB;
+    private final int rgb;
 
-    Color(int rgb) { this.RGB = 0xff000000 | rgb; }
+    Color(int rgb) { this.rgb = 0xff000000 | rgb; }
 
-    public int getRGB() { return RGB; }
+    public int getRGB() { return rgb; }
 
     public int getRed() { return (getRGB() >> 16) & 0xFF; }
 
@@ -35,7 +35,7 @@ public enum Color {
     @Override
     public String toString() {
         return "ColorForm{" +
-                "RGB=" + RGB +
+                "RGB=" + rgb +
                 "RED=" + getRed() +
                 "BLUE=" + getBlue() +
                 "GREEN=" + getGreen() +

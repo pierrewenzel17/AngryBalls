@@ -9,9 +9,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-final class BallTest {
+final class SimpleBallTest {
 
-    private List<IBall> _forms;
+    private List<Ball> _forms;
 
     @BeforeEach
     void setUp() {
@@ -33,7 +33,7 @@ final class BallTest {
 
     @Test
     void toStringForms() {
-        for (IBall f : _forms) {
+        for (Ball f : _forms) {
             System.out.println(f.toString());
             assertNotEquals("", f.toString());
         }

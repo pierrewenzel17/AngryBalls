@@ -1,6 +1,6 @@
 package com.ufr.mim.angryballs.models.balloptions;
 
-import com.ufr.mim.angryballs.models.IBall;
+import com.ufr.mim.angryballs.models.Ball;
 import mesmaths.cinematique.Collisions;
 
 /**
@@ -8,7 +8,7 @@ import mesmaths.cinematique.Collisions;
  */
 public final class Blocked extends BallOption {
 
-    public Blocked(final IBall ball) {
+    public Blocked(final Ball ball) {
         super(ball);
     }
 

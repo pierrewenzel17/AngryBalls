@@ -1,4 +1,4 @@
-package com.ufr.mim.angryballs.view
+package com.ufr.mim.angryballs.controllers
 
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
@@ -6,21 +6,23 @@ import javafx.application.Platform
 import javafx.event.EventHandler
 import javafx.geometry.Bounds
 import javafx.scene.layout.AnchorPane
-import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.util.Duration
 import tornadofx.*
 
-class MyView : View("AngryBall") {
+class ControllerView : View("AngryBalls developed by Pierre WENZEL and Sebastien PHILIPP") {
     override val root: AnchorPane by fxml("/MyView.fxml")
     private val background : AnchorPane by fxid()
-    private val circle : Circle = Circle(200.0, 100.0, 20.0, Color.DARKBLUE)
+    private val circle : Circle = Circle(200.0, 100.0, 20.0, )
     private var dx : Double = 4.0
     private var dy : Double = 3.0
     private lateinit var timeline : Timeline
     private var timelineOnPause : Boolean = true
 
     init {
+        /*val ball = SimpleBall(100.0, Color.BLUE)
+        val pilotBall = Pilot(ball)*/
+
         this.background.children.addAll(circle)
         circle.onMouseDragged = EventHandler {
             circle.centerX = it.x

@@ -1,21 +1,33 @@
 package com.ufr.mim.angryballs;
 
+import com.ufr.mim.angryballs.controllers.Controller;
 import com.ufr.mim.angryballs.utils.ConstantsUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public final class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource(ConstantsUtil.FXML_FILE +
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("AngryBalls developed by Pierre WENZEL and Sebastien PHILIPP");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ConstantsUtil.FXML_FILE +
                 ConstantsUtil.FILE_SEPARATOR + "sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        AnchorPane root = fxmlLoader.load();
+        Controller controller = fxmlLoader.getController();
+
+        Scene scene = new Scene(root, 650, 400);
+        primaryStage.setMinWidth(400);
+        primaryStage.setMinHeight(250);
+        primaryStage.setScene(scene);
         primaryStage.show();
+
+
+
+        //Vecteur a = new Vecteur(200,100);
+        //circle = new Circle(a.x, a.y, 20, Color.DARKBLUE);
     }
 
     public static void main(String[] args) {

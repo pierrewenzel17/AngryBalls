@@ -66,7 +66,7 @@ abstract class BallOption implements Ball {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Ball)) return false;
+        if (!(o instanceof BallOption)) return false;
         var ballOption = (BallOption) o;
         return ballWithOption.equals(ballOption.ballWithOption);
     }

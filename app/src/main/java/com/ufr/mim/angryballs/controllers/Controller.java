@@ -43,26 +43,26 @@ public class Controller implements Initializable {
 
         Vecteur p0, p1, p2, p3, p4, p5;
 
-        p0 = Vecteur.créationAléatoire(0, 0, xMax, yMax);
-        p1 = Vecteur.créationAléatoire(0, 0, xMax, yMax);
-        p2 = Vecteur.créationAléatoire(0, 0, xMax, yMax);
-        p3 = Vecteur.créationAléatoire(0, 0, xMax, yMax);
-        p4 = Vecteur.créationAléatoire(0, 0, xMax, yMax);
-        p5 = Vecteur.créationAléatoire(0, 0, xMax, yMax);
+        p0 = Vecteur.créationAléatoire(0, 0, 650, 400);
+        p1 = Vecteur.créationAléatoire(0, 0, 650, 400);
+        p2 = Vecteur.créationAléatoire(0, 0, 650, 400);
+        p3 = Vecteur.créationAléatoire(0, 0, 650, 400);
+        p4 = Vecteur.créationAléatoire(0, 0, 650, 400);
+        p5 = Vecteur.créationAléatoire(0, 0, 650, 400);
 
-        this.redBall = new SimpleBall(10, 1, Color.RED, p0, Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax));
-        this.yellowBall = new Gravity(new AirFriction(new SimpleBall(20, 1, Color.YELLOW, p1, Vecteur.créationAléatoire(-vMax, -vMax, vMax, 0))), new Vecteur(0, 0.001));
-        this.greenBall = new Newton(new AirFriction(new SimpleBall(20, 1, Color.GREEN, p2, Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))));
-        this.blueBall =  new WallPass(new SimpleBall(15, 1, Color.BLUE, p3, Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)));
-        this.blackBall = new Newton(new Blocked(new SimpleBall(70, 1, Color.BLACK, p4, Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))));
+        redBall = new SimpleBall(20, 1, Color.RED, p0, Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax));
+        yellowBall = new Gravity(new AirFriction(new SimpleBall(20, 1, Color.YELLOW, p1, Vecteur.créationAléatoire(-vMax, -vMax, vMax, 0))), new Vecteur(0, 0.001));
+        greenBall = new Newton(new AirFriction(new SimpleBall(20, 1, Color.GREEN, p5, Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))));
+        blueBall =  new WallPass(new SimpleBall(20, 1, Color.BLUE, p3, Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)));
+        blackBall = new Newton(new Blocked(new SimpleBall(20, 1, Color.BLACK, p4, Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))));
         //this.whiteBall = new Pilot(new SimpleBall(50, 1, Color.WHITE, p5, Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)));
 
         listBall = new ArrayList<>();
-        listBall.add(this.redBall);
-        listBall.add(this.yellowBall);
-        listBall.add(this.greenBall);
-        listBall.add(this.blueBall);
-        listBall.add(this.blackBall);
+        listBall.add(redBall);
+        listBall.add(yellowBall);
+        listBall.add(greenBall);
+        listBall.add(blueBall);
+        listBall.add(blackBall);
         //listBall.add(this.whiteBall);
 
         drawBallsWithFx = new DrawBallsWithFx(listBall);
@@ -78,6 +78,7 @@ public class Controller implements Initializable {
             int deltaT = 20;
             timelineOnPause = false;
             timeline = new Timeline(new KeyFrame(Duration.millis(deltaT), t -> {
+
                 Bounds bounds = background.getBoundsInLocal();
                 UpdateBallPosition updateBallPosition = new UpdateBallPosition(listBall, deltaT, bounds);
                 updateBallPosition.start();

@@ -1,6 +1,6 @@
 package com.ufr.mim.angryballs;
 
-import com.ufr.mim.angryballs.controllers.Controller;
+import com.ufr.mim.angryballs.controllers.ControllerFrame;
 import com.ufr.mim.angryballs.utils.ConstantsUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,18 +16,13 @@ public final class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ConstantsUtil.FXML_FILE +
                 ConstantsUtil.FILE_SEPARATOR + "sample.fxml"));
         AnchorPane root = fxmlLoader.load();
-        Controller controller = fxmlLoader.getController();
+        ControllerFrame controllerFrame = fxmlLoader.getController();
 
         Scene scene = new Scene(root, 650, 400);
         primaryStage.setMinWidth(400);
         primaryStage.setMinHeight(250);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
-
-        //Vecteur a = new Vecteur(200,100);
-        //circle = new Circle(a.x, a.y, 20, Color.DARKBLUE);
     }
 
     public static void main(String[] args) {

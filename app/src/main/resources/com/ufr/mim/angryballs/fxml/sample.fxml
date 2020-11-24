@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ufr.mim.angryballs.controllers.Controller">
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ufr.mim.angryballs.controllers.ControllerFrame">
     <children>
         <VBox minHeight="400.0" minWidth="650.0" prefHeight="400.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -17,9 +17,9 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="Fichier">
                             <items>
-                                <MenuItem fx:id="BtnMenuDemarrer" mnemonicParsing="false" onAction="#lancerBoules" text="Démarrer" />
-                                <MenuItem fx:id="BtnMenuArreter" mnemonicParsing="false" onAction="#arreterBoules" text="Arrêter" />
-                                <MenuItem fx:id="BtnMenuQuitter" mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+                                <MenuItem fx:id="BtnMenuDemarrer" mnemonicParsing="false" onAction="#throwBall" text="Démarrer" />
+                                <MenuItem fx:id="BtnMenuArreter" mnemonicParsing="false" onAction="#stopBall" text="Arrêter" />
+                                <MenuItem fx:id="BtnMenuQuitter" mnemonicParsing="false" onAction="#quit" text="Quitter" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Edition" />
@@ -35,8 +35,8 @@
                                     <children>
                                         <HBox alignment="CENTER" prefHeight="43.0" prefWidth="650.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <children>
-                                                <Button fx:id="BtnLancer" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#lancerBoules" prefHeight="27.0" prefWidth="117.0" text="Lancer les Boules" />
-                                                <Button fx:id="BtnArreter" contentDisplay="CENTER" mnemonicParsing="false" onAction="#arreterBoules" prefHeight="27.0" prefWidth="117.0" text="Arreter les Boules" />
+                                                <Button fx:id="BtnLancer" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#throwBall" prefHeight="27.0" prefWidth="117.0" text="Lancer les Boules" />
+                                                <Button fx:id="BtnArreter" contentDisplay="CENTER" mnemonicParsing="false" onAction="#stopBall" prefHeight="27.0" prefWidth="117.0" text="Arreter les Boules" />
                                             </children>
                                         </HBox>
                                     </children>

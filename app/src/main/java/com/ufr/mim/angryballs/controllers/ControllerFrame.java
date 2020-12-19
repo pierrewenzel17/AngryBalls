@@ -3,17 +3,15 @@ package com.ufr.mim.angryballs.controllers;
 import com.ufr.mim.angryballs.models.Ball;
 import com.ufr.mim.angryballs.models.Color;
 import com.ufr.mim.angryballs.models.SimpleBall;
+import com.ufr.mim.angryballs.models.StateClic;
 import com.ufr.mim.angryballs.models.balloptions.*;
+import com.ufr.mim.angryballs.service.MovingBallsScheduledService;
 import com.ufr.mim.angryballs.views.draw.DrawBallsFactory;
 import com.ufr.mim.angryballs.views.draw.DrawBallsWithFx;
-import com.ufr.mim.angryballs.views.draw.UpdateBallPosition;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -23,6 +21,7 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Gestion de l'initialisation de l'interface graphique
@@ -32,36 +31,32 @@ public class ControllerFrame implements Initializable {
 
     @FXML
     public AnchorPane background = new AnchorPane();
-    private Timeline timeline = null;
-    private boolean timelineOnPause = true;
+    private MovingBallsScheduledService service;
+    private boolean serviceNotRunning = true;
     private Collection<Ball> listBall;
     private DrawBallsFactory<Circle> drawBallsWithFx;
-    private Pilot pilot;
+    private StateClic state;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         double vMax = 0.1;
-        double xMax = 650;
-        double yMax = 400;
-
-        pilot = new Pilot(new SimpleBall(20, 1, Color.ORANGE, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)));
+        double xMax = 500;
+        double yMax = 300;
 
         listBall = List.of(
-          new SimpleBall(20, 1, Color.RED, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)),
-          new Gravity(new AirFriction(new SimpleBall(20, 1, Color.YELLOW, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, 0))), new Vecteur(0, 0.001)),
-          new Newton(new AirFriction(new SimpleBall(20, 1, Color.GREEN, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)))),
-          new WallPass(new SimpleBall(20, 1, Color.BLUE, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))),
-          new Newton(new Blocked(new SimpleBall(20, 1, Color.BLACK, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)))),
-          pilot
+            //new Pilot(new SimpleBall(20, 1, Color.RED, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))),
+            //new Pilot(new Gravity(new AirFriction(new SimpleBall(20, 1, Color.YELLOW, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, 0))), new Vecteur(0, 0.001))),
+            //new Pilot(new Newton(new AirFriction(new SimpleBall(20, 1, Color.GREEN, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))))),
+            //new Pilot(new WallPass(new SimpleBall(20, 1, Color.BLUE, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)))),
+            //new Pilot(new Newton(new Blocked(new SimpleBall(20, 1, Color.BLACK, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)))))
+            new Pilot(new SimpleBall(20, 1, Color.ORANGE, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)))
         );
 
         drawBallsWithFx = new DrawBallsWithFx(listBall);
         listBall.stream().map(drawBallsWithFx::getShape).forEach(background.getChildren()::add);
 
-        background.setOnMouseDragged(t -> {
-            pilot.setClickPosition(new Vecteur(t.getX(), t.getY()));
-            //System.out.println(pilot.getClickPosition());
-        });
+        //gestion du clic avec la sourie (bille pilot)
+        manageMouseListener();
     }
 
     /**
@@ -69,27 +64,14 @@ public class ControllerFrame implements Initializable {
      */
     @FXML
     public void throwBall() {
-        if (timelineOnPause) {
-            int deltaT = 20;    //taux de rafraichissement
-            timelineOnPause = false;
+        if (serviceNotRunning) {
+            final int deltaT = 20;    //taux de rafraichissement
+            serviceNotRunning = false;
 
-            timeline = new Timeline(new KeyFrame(Duration.millis(deltaT), t -> updatesPositions(deltaT)));
-            timeline.setCycleCount(Animation.INDEFINITE);
-            timeline.play();
+            service = new MovingBallsScheduledService(listBall, deltaT, background.getWidth(), background.getHeight(), drawBallsWithFx);
+            service.setPeriod(Duration.millis(deltaT));
+            service.start();
         }
-    }
-
-    /**
-     * Met-à-jour la position des {@link Ball billes} en fonction d'un intervalle de temps
-     * @param deltaT : intervalle de temps en millisecondes
-     */
-    private void updatesPositions(int deltaT) {
-        UpdateBallPosition updateBallPosition = new UpdateBallPosition(listBall, deltaT, background.getWidth(), background.getHeight());
-        updateBallPosition.start();
-        listBall.forEach(ball -> {
-            drawBallsWithFx.getShape(ball).setCenterX(ball.getPosition().x);
-            drawBallsWithFx.getShape(ball).setCenterY(ball.getPosition().y);
-        });
     }
 
     /**
@@ -97,12 +79,52 @@ public class ControllerFrame implements Initializable {
      */
     @FXML
     public void stopBall() {
-        timeline.pause();
-        timelineOnPause = true;
+        service.cancel();
+        serviceNotRunning = true;
     }
 
     @FXML
     public void quit() {
         Platform.exit();
+    }
+
+    /**
+     * Permet au programme de spécifier ce qu'il doit faire lors d'un interaction avec la sourie
+     */
+    private void manageMouseListener() {
+        AtomicReference<Ball> ballSelect = new AtomicReference<>();
+
+        Platform.runLater(() -> {
+            background.setOnMousePressed(event -> {
+                state = new StateClic.Play();
+                ballSelect.set(listBall.stream().filter(ball -> ball instanceof Pilot && isBallSelected(event, ball)).findFirst().orElse(null));
+            });
+            background.setOnMouseReleased(event -> {
+                if (ballSelect.get() != null) {
+                    state.run((Pilot) ballSelect.get(), new Vecteur(event.getX() - ballSelect.get().getX(), event.getY() - ballSelect.get().getY()));
+                }
+                state = new StateClic.Stop();
+            });
+        });
+
+
+    }
+
+    /**
+     * Vérifie qu'on sélectionne bien la bille attrapée
+     * @param event : MouseEvent lié au click
+     * @param ball : bille que l'on cherche à attraper
+     * @return true : bonne bille
+     *          false : autre bille
+     */
+    private boolean isBallSelected(MouseEvent event, Ball ball) {
+        return getDistanceBetweenMouseAndBall(event, ball) <= ball.getRadius();
+    }
+
+    /**
+     * @return la distance entre la position de la sourie et la bille
+     */
+    private double getDistanceBetweenMouseAndBall(MouseEvent event, Ball ball) {
+        return Math.hypot(event.getX() - ball.getX(), event.getY() - ball.getY());
     }
 }

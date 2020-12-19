@@ -23,6 +23,8 @@ public final class Newton extends BallOption {
     @Override
     public void manageAcceleration(final Collection<Ball> balls) {
         super.manageAcceleration(balls);
+        //NewtonUpdateService task = new NewtonUpdateService(this, balls);
+        //task.run();
         getAcceleration().ajoute(accelerate(balls));
     }
 

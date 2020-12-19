@@ -2,7 +2,6 @@ package com.ufr.mim.angryballs.views.draw;
 
 import com.ufr.mim.angryballs.models.Ball;
 import com.ufr.mim.angryballs.utils.BallsUtil;
-import javafx.geometry.Bounds;
 
 import java.util.Collection;
 

@@ -17,6 +17,15 @@ public interface Ball {
     Vecteur getSpeed();
     Vecteur getAcceleration();
     double getMass();
+
+    default double getX() {
+        return getPosition().x;
+    }
+
+    default double getY() {
+        return getPosition().y;
+    }
+
     /**
      * Fonction de déplacement d'une bille en fonction du temps
      * @param deltaT : variable de temps en millisecondes

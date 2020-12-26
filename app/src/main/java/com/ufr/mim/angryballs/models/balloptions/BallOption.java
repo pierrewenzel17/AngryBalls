@@ -2,7 +2,6 @@ package com.ufr.mim.angryballs.models.balloptions;
 
 import com.ufr.mim.angryballs.models.Ball;
 import com.ufr.mim.angryballs.models.Color;
-import com.ufr.mim.angryballs.views.draw.IDrawVisitor;
 import mesmaths.geometrie.base.Vecteur;
 
 import java.util.Collection;
@@ -65,14 +64,11 @@ abstract class BallOption implements Ball {
     public void manageAcceleration(final Collection<Ball> balls) { this.ballWithOption.manageAcceleration(balls); }
 
     @Override
-    public <G> void draw(IDrawVisitor<G> drawVisitor, G g) { this.ballWithOption.draw(drawVisitor, g); }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Ball)) return false;
+        if (!(o instanceof BallOption)) return false;
         var ballOption = (BallOption) o;
-        return ballWithOption.equals(ballOption.ballWithOption);
+        return ballWithOption.hashCode() == (ballOption.ballWithOption).hashCode();
     }
 
     @Override

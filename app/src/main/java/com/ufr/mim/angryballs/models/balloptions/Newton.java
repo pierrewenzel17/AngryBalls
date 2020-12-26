@@ -23,7 +23,7 @@ public final class Newton extends BallOption {
     @Override
     public void manageAcceleration(final Collection<Ball> balls) {
         super.manageAcceleration(balls);
-        getAcceleration().ajoute(accelerate(balls));
+        this.getAcceleration().ajoute(accelerate(balls));
     }
 
     /**

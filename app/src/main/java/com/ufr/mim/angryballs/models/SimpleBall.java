@@ -1,6 +1,5 @@
 package com.ufr.mim.angryballs.models;
 
-import com.ufr.mim.angryballs.views.draw.IDrawVisitor;
 import mesmaths.cinematique.Cinematique;
 import mesmaths.cinematique.Collisions;
 import mesmaths.geometrie.base.Geop;
@@ -28,6 +27,10 @@ public final class SimpleBall implements Ball {
         this.position = position;
         this.speed = speed;
         this.acceleration = acceleration;
+    }
+
+    public SimpleBall(double radius, double density, Color color, Vecteur position, Vecteur speed) {
+        this(radius,density,color,position,speed,new Vecteur());
     }
 
     public SimpleBall(double radius, double density, Color color) {
@@ -82,11 +85,6 @@ public final class SimpleBall implements Ball {
 
     @Override
     public void manageAcceleration(final Collection<Ball> balls) { this.getAcceleration().set(Vecteur.VECTEURNUL); }
-
-    @Override
-    public <G> void draw(final IDrawVisitor<G> drawVisitor, G g) {
-        drawVisitor.draw(this, g);
-    }
 
     @Override
     public boolean equals(Object o) {

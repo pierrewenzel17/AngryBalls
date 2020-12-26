@@ -1,7 +1,5 @@
 package com.ufr.mim.angryballs.models;
 
-import com.ufr.mim.angryballs.views.draw.IDrawVisitor;
-
 import mesmaths.cinematique.Collisions;
 import mesmaths.geometrie.base.Vecteur;
 
@@ -19,6 +17,15 @@ public interface Ball {
     Vecteur getSpeed();
     Vecteur getAcceleration();
     double getMass();
+
+    default double getX() {
+        return getPosition().x;
+    }
+
+    default double getY() {
+        return getPosition().y;
+    }
+
     /**
      * Fonction de déplacement d'une bille en fonction du temps
      * @param deltaT : variable de temps en millisecondes
@@ -63,12 +70,4 @@ public interface Ball {
         return Collisions.CollisionBilleBille(getPosition(), getRadius(), getSpeed(),  getMass(),
                 ball.getPosition(), ball.getRadius(), ball.getSpeed(), ball.getMass());
     }
-    /**
-     * Fonction qui dessine la bille (accept du design pattern visitor)
-     * @param drawVisitor Visiteur de dessin
-     * @param g Variable graphique d'attache de dessin
-     * @param <G> Classe où on attache le dessin qui dépend de la bibliothèque d'affichage (AWT ...)
-     * @see IDrawVisitor
-     */
-    <G> void draw(final IDrawVisitor<G> drawVisitor, G g);
 }

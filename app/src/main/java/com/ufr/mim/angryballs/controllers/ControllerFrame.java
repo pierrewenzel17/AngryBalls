@@ -5,7 +5,7 @@ import com.ufr.mim.angryballs.models.Color;
 import com.ufr.mim.angryballs.models.SimpleBall;
 import com.ufr.mim.angryballs.models.StateClic;
 import com.ufr.mim.angryballs.models.balloptions.*;
-import com.ufr.mim.angryballs.service.MovingBallsScheduledService;
+import com.ufr.mim.angryballs.services.MovingBallsScheduledService;
 import com.ufr.mim.angryballs.views.draw.DrawBallsFactory;
 import com.ufr.mim.angryballs.views.draw.DrawBallsWithFx;
 import javafx.application.Platform;
@@ -39,23 +39,20 @@ public class ControllerFrame implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        double vMax = 0.1;
-        double xMax = 500;
-        double yMax = 300;
+        double vMax = 0.1;  double xMax = 500;  double yMax = 300;
 
         listBall = List.of(
-            //new Pilot(new SimpleBall(20, 1, Color.RED, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))),
-            //new Pilot(new Gravity(new AirFriction(new SimpleBall(20, 1, Color.YELLOW, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, 0))), new Vecteur(0, 0.001))),
-            //new Pilot(new Newton(new AirFriction(new SimpleBall(20, 1, Color.GREEN, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))))),
-            //new Pilot(new WallPass(new SimpleBall(20, 1, Color.BLUE, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)))),
-            //new Pilot(new Newton(new Blocked(new SimpleBall(20, 1, Color.BLACK, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)))))
+            new Pilot(new SimpleBall(20, 1, Color.RED, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))),
+            new Pilot(new Gravity(new AirFriction(new SimpleBall(20, 1, Color.YELLOW, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, 0))), new Vecteur(0, 0.001))),
+            new Pilot(new Newton(new AirFriction(new SimpleBall(20, 1, Color.GREEN, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))))),
+            new Pilot(new WallPass(new SimpleBall(20, 1, Color.BLUE, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)))),
+            new Pilot(new Newton(new Blocked(new SimpleBall(20, 1, Color.BLACK, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax))))),
             new Pilot(new SimpleBall(20, 1, Color.ORANGE, Vecteur.créationAléatoire(0, 0, xMax, yMax), Vecteur.créationAléatoire(-vMax, -vMax, vMax, vMax)))
         );
 
         drawBallsWithFx = new DrawBallsWithFx(listBall);
         listBall.stream().map(drawBallsWithFx::getShape).forEach(background.getChildren()::add);
 
-        //gestion du clic avec la sourie (bille pilot)
         manageMouseListener();
     }
 
@@ -106,8 +103,6 @@ public class ControllerFrame implements Initializable {
                 state = new StateClic.Stop();
             });
         });
-
-
     }
 
     /**

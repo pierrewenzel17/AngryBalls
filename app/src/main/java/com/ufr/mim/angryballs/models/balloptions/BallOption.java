@@ -68,7 +68,7 @@ abstract class BallOption implements Ball {
         if (this == o) return true;
         if (!(o instanceof BallOption)) return false;
         var ballOption = (BallOption) o;
-        return ballWithOption.equals(ballOption.ballWithOption);
+        return ballWithOption.hashCode() == (ballOption.ballWithOption).hashCode();
     }
 
     @Override

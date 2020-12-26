@@ -16,7 +16,7 @@ public final class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ConstantsUtil.FXML_FILE +
                 ConstantsUtil.FILE_SEPARATOR + "sample.fxml"));
         AnchorPane root = fxmlLoader.load();
-        ControllerFrame controllerFrame = fxmlLoader.getController();
+        fxmlLoader.getController();
 
         Scene scene = new Scene(root, 650, 400);
         primaryStage.setMinWidth(400);

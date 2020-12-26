@@ -1,4 +1,4 @@
-package com.ufr.mim.angryballs.service;
+package com.ufr.mim.angryballs.services;
 
 import com.ufr.mim.angryballs.models.Ball;
 import com.ufr.mim.angryballs.utils.BallsUtil;
@@ -41,6 +41,7 @@ public class MovingBallsScheduledService extends ScheduledService<Void> {
                     drawBallsWithFx.getShape(ball).setCenterX(ball.getPosition().x);
                     drawBallsWithFx.getShape(ball).setCenterY(ball.getPosition().y);
                 });
+
                 return null;
             }
         };

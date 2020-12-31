@@ -1,35 +1,39 @@
 package com.ufr.mim.angryballs.server;
 
-import com.ufr.mim.angryballs.core.models.Ball;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
-import java.util.Collection;
-import java.util.List;
+import java.net.Socket;
 
 public final class ServerBalls implements Runnable {
 
+    static final Logger logger = Logger.getLogger(ServerBalls.class);
+
     private final ServerSocket socket;
-    private final Collection<Ball> balls;
 
+    private final CharlesHelpMe charlesHelpMe;
 
-    public ServerBalls(int port, final String ip, Ball... balls) throws IOException {
-        this(port, ip, List.of(balls));
-    }
+    private boolean isRunning = true;
 
-    public ServerBalls(int port, final String ip, Collection<Ball> balls) throws IOException {
-        this.socket = new ServerSocket(port,50, InetAddress.getByName(ip));
-        this.balls = balls;
+    public ServerBalls(int port, final String ip, CharlesHelpMe charlesHelpMe) throws IOException {
+        this.socket = new ServerSocket(port, 50, InetAddress.getByName(ip));
+        this.charlesHelpMe = charlesHelpMe;
     }
 
     @Override
     public void run() {
-        while (!Thread.interrupted()) {
-            //accept des clients
-            // calcul les bille
-            PositionDetermination.getInstance().determinate(this.balls);
-            // les envoient au clients
+        try {
+            while (isRunning) {
+                Socket client = socket.accept();
+                logger.info("Connexion client reçu.");
+                var clientBalls = new ClientBalls(client, charlesHelpMe);
+                Thread threadClient = new Thread(clientBalls);
+                threadClient.start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

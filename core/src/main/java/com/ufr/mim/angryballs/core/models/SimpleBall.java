@@ -29,6 +29,10 @@ public final class SimpleBall implements Ball {
         this.acceleration = acceleration;
     }
 
+    public SimpleBall(double radius, double density, Color color, Vecteur position, Vecteur speed) {
+        this(radius,density,color,position,speed,new Vecteur(0,0));
+    }
+
     public SimpleBall(double radius, double density, Color color) {
         this(radius, density, color, new Vecteur(), new Vecteur(), new Vecteur());
     }

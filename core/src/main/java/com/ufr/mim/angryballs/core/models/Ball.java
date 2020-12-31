@@ -1,5 +1,6 @@
 package com.ufr.mim.angryballs.core.models;
 
+import com.ufr.mim.angryballs.core.models.balloptions.*;
 import mesmaths.cinematique.Collisions;
 import mesmaths.geometrie.base.Vecteur;
 
@@ -28,8 +29,8 @@ public interface Ball extends Serializable {
      * <p>Dans {@link SimpleBall} cette fonction crée un rebond sur les bords.</p>
      * <p>Elle est redéfinit dans les classes d'options suivante : </p>
      * <ul>
-     *     <li>{@link com.ufr.mim.angryballs.core.models.balloptions.Blocked}</li>
-     *     <li>{@link com.ufr.mim.angryballs.core.models.balloptions.WallPass}</li>
+     *     <li>{@link Blocked}</li>
+     *     <li>{@link WallPass}</li>
      * </ul>
      * <p>Toute les opérations sur les paramètres peu importe les options sont réalisés dans {@link Collisions}</p>
      * @param xAxis Représente l'axe des abscisses
@@ -43,9 +44,9 @@ public interface Ball extends Serializable {
      * <p>Dans {@link SimpleBall} l'accélération de base est {@link Vecteur Vecteur.VECTEURNUL} donc null.</p>
      * <p>Elle est redéfinit dans les classes d'options suivante : </p>
      * <ul>
-     *     <li>{@link com.ufr.mim.angryballs.core.models.balloptions.Gravity}</li>
-     *     <li>{@link com.ufr.mim.angryballs.core.models.balloptions.Newton}</li>
-     *     <li>{@link com.ufr.mim.angryballs.core.models.balloptions.AirFriction}</li>
+     *     <li>{@link Gravity}</li>
+     *     <li>{@link Newton}</li>
+     *     <li>{@link AirFriction}</li>
      * </ul>
      * @param balls : <p>représente toute les billes en mouvement, ce paramètre n'est que utilisé
      *              dans l'accélération de Newton.

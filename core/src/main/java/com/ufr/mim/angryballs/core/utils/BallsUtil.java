@@ -1,5 +1,6 @@
 package com.ufr.mim.angryballs.core.utils;
 
+import com.ufr.mim.angryballs.core.dto.SimpleBallDTO;
 import com.ufr.mim.angryballs.core.models.Ball;
 
 import java.util.Collection;
@@ -36,5 +37,14 @@ public final class BallsUtil {
      */
     public static boolean bumpInto(final Ball ball, final Collection<Ball> balls) {
         return otherBalls(ball, balls).stream().anyMatch(ball::isInCollision);
+    }
+
+    /**
+     * Fonction qui allege une bille pour le transfaire client-serveur
+     * @param ball la bille a tranferer
+     * @return un {@link SimpleBallDTO} soit la bille de transfere
+     */
+    public static SimpleBallDTO BallToDto(final Ball ball) {
+        return new SimpleBallDTO(ball.hashCode(), ball.getRadius(), ball.getColor().getHexadecimal(), ball.getPosition());
     }
 }

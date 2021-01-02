@@ -1,8 +1,12 @@
 package com.ufr.mim.angryballs.server;
 
+import com.ufr.mim.angryballs.core.models.Ball;
 import com.ufr.mim.angryballs.core.utils.BallsUtil;
+import org.apache.log4j.Logger;
 
 public final class PositionDetermination implements Runnable {
+
+    static final Logger logger = Logger.getLogger(PositionDetermination.class);
 
     private final CharlesHelpMe charlesHelpMe;
 
@@ -15,19 +19,22 @@ public final class PositionDetermination implements Runnable {
         try {
             while (!Thread.interrupted()) {
                 synchronized (charlesHelpMe) {
-                    while(charlesHelpMe.isSending()) { charlesHelpMe.wait(); }
+                    while(!charlesHelpMe.isSendingAll()) { charlesHelpMe.wait(); }
                     int deltaT = 20;
-                    for (int i = 0; i < charlesHelpMe.getBalls().size(); i++) {
-                        charlesHelpMe.getBalls().get(i).move(deltaT);
-                        charlesHelpMe.getBalls().get(i).manageAcceleration(charlesHelpMe.getBalls());
-                        charlesHelpMe.getBalls().get(i).manageCollision(0,0, 650, 400);
-                        BallsUtil.bumpInto(charlesHelpMe.getBalls().get(i), charlesHelpMe.getBalls());
+                    for (Ball ball :  charlesHelpMe.getBalls()) {
+                        ball.move(deltaT);
+                        ball.manageAcceleration(charlesHelpMe.getBalls());
+                        ball.manageCollision(0,0, 650, 400);
+                        BallsUtil.bumpInto(ball, charlesHelpMe.getBalls());
                     }
-                    System.out.println("j'ai calculer:" + charlesHelpMe.getBalls().hashCode() +" result : " + charlesHelpMe.getBalls());
-                    charlesHelpMe.setSend(true);
+                    logger.info("j'ai calculé: " + charlesHelpMe.getBalls());
+                    Thread.sleep(40);
+                    charlesHelpMe.setAllFalse();
                     charlesHelpMe.notifyAll();
                 }
             }
-        } catch (InterruptedException e) {}
+        } catch (InterruptedException e) {
+            logger.info("Thread coupé");
+        }
     }
 }

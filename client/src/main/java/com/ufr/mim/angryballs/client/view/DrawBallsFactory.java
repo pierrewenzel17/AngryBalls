@@ -1,6 +1,8 @@
 package com.ufr.mim.angryballs.client.view;
 
-import com.ufr.mim.angryballs.client.model.SimpleBallDTO;
+
+
+import com.ufr.mim.angryballs.core.dto.SimpleBallDTO;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,12 +25,19 @@ public abstract class DrawBallsFactory<G> {
      * @param transformer méthode renvoie la forme de dessin
      */
     protected DrawBallsFactory(Collection<SimpleBallDTO> balls, Function<SimpleBallDTO, G> transformer) {
-        balls.forEach(ball -> ballsMap.put(ball.hashCode(), transformer.apply(ball)));
+        balls.forEach(ball -> ballsMap.put(ball.getId(), transformer.apply(ball)));
     }
     /**
      * Fonction qui retourne la forme de dessin
      * @param ball la bille dont on veut le dessin
      * @return la forme de dessin
      */
-    public G getShape(SimpleBallDTO ball) { return ballsMap.get(ball.hashCode()); }
+    public G getShape(SimpleBallDTO ball) { return ballsMap.get(ball.getId()); }
+
+    @Override
+    public String toString() {
+        return "DrawBallsFactory{" +
+                "ballsMap=" + ballsMap +
+                '}';
+    }
 }

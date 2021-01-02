@@ -1,5 +1,6 @@
 package com.ufr.mim.angryballs.client;
 
+import com.ufr.mim.angryballs.client.controllers.ControllerFrame;
 import com.ufr.mim.angryballs.client.utils.ConstantsUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +16,13 @@ public final class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ConstantsUtil.FXML_FILE +
                 ConstantsUtil.FILE_SEPARATOR + "sample.fxml"));
         AnchorPane root = fxmlLoader.load();
-        fxmlLoader.getController();
+        ControllerFrame controllerFrame = fxmlLoader.getController();
 
         Scene scene = new Scene(root, 650, 400);
         primaryStage.setMinWidth(400);
         primaryStage.setMinHeight(250);
         primaryStage.setScene(scene);
+        primaryStage.setOnHidden(e -> controllerFrame.quit());
         primaryStage.show();
     }
 

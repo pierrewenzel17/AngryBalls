@@ -6,19 +6,20 @@ package com.ufr.mim.angryballs.core.models;
  */
 public enum Color {
 
-    WHITE(16777215),
-    BLACK(0),
-    YELLOW(16773888),
-    BLUE(55551),
-    RED(15938869),
-    PURPLE( 12006899),
-    ORANGE(16731392),
-    GREEN(1889581),
-    BEIGE( 13995804);
+    WHITE(16777215, "blanc"),
+    BLACK(0, "noir"),
+    YELLOW(16773888, "jaune"),
+    BLUE(55551, "blue"),
+    RED(15938869, "rouge"),
+    PURPLE( 12006899, "violet"),
+    ORANGE(16731392, "orange"),
+    GREEN(1889581, "vert"),
+    BEIGE( 13995804, "beige");
 
     private final int rgb;
+    private final String name;
 
-    Color(int rgb) { this.rgb = 0xff000000 | rgb; }
+    Color(int rgb, String name) { this.rgb = 0xff000000 | rgb; this.name = name; }
 
     public int getRGB() { return rgb; }
 
@@ -35,11 +36,7 @@ public enum Color {
     @Override
     public String toString() {
         return "ColorForm{" +
-                "RGB=" + rgb +
-                "RED=" + getRed() +
-                "BLUE=" + getBlue() +
-                "GREEN=" + getGreen() +
-                "HEXADECIMAL=" + getHexadecimal() +
+                "Name=" + name +
                 '}';
     }
 }

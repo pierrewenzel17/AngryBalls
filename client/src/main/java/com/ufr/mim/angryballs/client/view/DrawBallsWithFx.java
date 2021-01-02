@@ -1,7 +1,6 @@
 package com.ufr.mim.angryballs.client.view;
 
-import com.ufr.mim.angryballs.client.model.SimpleBallDTO;
-
+import com.ufr.mim.angryballs.core.dto.SimpleBallDTO;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -14,6 +13,6 @@ public class DrawBallsWithFx extends DrawBallsFactory<Circle> {
 
     public DrawBallsWithFx(Collection<SimpleBallDTO> balls) {
         super(balls, ball -> new Circle(ball.getPosition().x, ball.getPosition().y,
-                ball.getRadius(), Color.valueOf(ball.getColor().getHexadecimal())));
+                ball.getRadius(), Color.valueOf(ball.getColor())));
     }
 }

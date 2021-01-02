@@ -2,8 +2,8 @@ package com.ufr.mim.angryballs.client.services;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ufr.mim.angryballs.core.dto.SimpleBallDTO;
 import com.ufr.mim.angryballs.core.models.balloptions.Pilot;
-import com.ufr.mim.angryballs.client.model.SimpleBallDTO;
 
 import com.ufr.mim.angryballs.client.utils.ConstantsUtil;
 import mesmaths.geometrie.base.Vecteur;
@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,28 +39,22 @@ public class DataSendingManager {
      * @return listBalls : liste de l'ensemble des {@link SimpleBallDTO} que l'on affiche
      */
     public static Collection<SimpleBallDTO> initializeListBalls() {
-        Collection<SimpleBallDTO> listBalls = new ArrayList<>();
-        //while(true) {
-            try {
-                Socket socket = getSocket();
-                ObjectInputStream reader = new ObjectInputStream(socket.getInputStream());
-                String message = (String) reader.readObject();
+        Collection<SimpleBallDTO> simpleBallDTOCollection = Collections.emptyList();
+        try {
+            Socket socket = getSocket();
+            ObjectInputStream reader = new ObjectInputStream(socket.getInputStream());
+            String message = (String) reader.readObject();
 
-                reader.close();
+            //reader.close();
 
-                final GsonBuilder builder = new GsonBuilder();
-                final Gson gson = builder.setPrettyPrinting().create();
-                SimpleBallDTO simpleBallDTO = gson.fromJson(message, SimpleBallDTO.class);
-
-                listBalls.add(simpleBallDTO);
-            } catch (ClassNotFoundException ee) {
-                ee.printStackTrace();
-                //break;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        //}
-        return listBalls;
+            final GsonBuilder builder = new GsonBuilder();
+            final Gson gson = builder.setPrettyPrinting().create();
+            simpleBallDTOCollection = List.of(gson.fromJson(message, SimpleBallDTO[].class));
+        } catch (IOException | ClassNotFoundException ee) {
+            ee.printStackTrace();
+        }
+        System.out.println(simpleBallDTOCollection);
+        return simpleBallDTOCollection;
     }
 
     /**
@@ -92,11 +87,11 @@ public class DataSendingManager {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public static SimpleBallDTO receiveJSONObject(ObjectInputStream reader) throws IOException, ClassNotFoundException {
+    public static Collection<SimpleBallDTO> receiveJSONObject(ObjectInputStream reader) throws IOException, ClassNotFoundException {
         final String message = (String) reader.readObject();
-        reader.close();
+        //reader.close();
 
         final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        return gson.fromJson(message, SimpleBallDTO.class);
+        return List.of(gson.fromJson(message, SimpleBallDTO[].class));
     }
 }

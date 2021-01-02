@@ -1,10 +1,11 @@
 package com.ufr.mim.angryballs.client.controllers;
 
-import com.ufr.mim.angryballs.client.model.SimpleBallDTO;
 import com.ufr.mim.angryballs.client.services.DataSendingManager;
 import com.ufr.mim.angryballs.client.services.UpdateBallsPosition;
+import com.ufr.mim.angryballs.client.view.BasisChange;
 import com.ufr.mim.angryballs.client.view.DrawBallsFactory;
 import com.ufr.mim.angryballs.client.view.DrawBallsWithFx;
+import com.ufr.mim.angryballs.core.dto.SimpleBallDTO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -36,9 +37,10 @@ public class ControllerFrame implements Initializable {
         listBalls = DataSendingManager.initializeListBalls();
 
         drawBallsWithFx = new DrawBallsWithFx(listBalls);
+        BasisChange.basisChange(listBalls, background);
         listBalls.stream().map(drawBallsWithFx::getShape).forEach(background.getChildren()::add);
 
-        manageMouseListener();
+        //manageMouseListener();
     }
 
     /**
@@ -48,7 +50,8 @@ public class ControllerFrame implements Initializable {
     public void throwBall() {
         if (serviceNotRunning) {
             serviceNotRunning = false;
-            updateBallsPosition = new UpdateBallsPosition(drawBallsWithFx);
+            updateBallsPosition = new UpdateBallsPosition(drawBallsWithFx, background);
+            updateBallsPosition.setDaemon(true);
             updateBallsPosition.start();
         }
     }
@@ -64,39 +67,40 @@ public class ControllerFrame implements Initializable {
 
     @FXML
     public void quit() {
+        updateBallsPosition.interrupt();
         Platform.exit();
     }
 
-    /**
-     * Permet au programme de spécifier ce qu'il doit faire lors d'un interaction avec la sourie
-     */
-    private void manageMouseListener() {
-        AtomicReference<SimpleBallDTO> ballSelect = new AtomicReference<>();
-        Platform.runLater(() -> {
-            background.setOnMousePressed(mouseEvent -> ballSelect.set(listBalls.stream().filter(ball -> isBallSelected(mouseEvent, ball)).findFirst().orElse(null)));
-            background.setOnMouseReleased(mouseEvent -> {
-                if (ballSelect.get() != null) {
-                    DataSendingManager.sendJSONObject(ballSelect.get().getHashcode(), new Vecteur(mouseEvent.getX(), mouseEvent.getY()));
-                }
-            });
-        });
-    }
-
-    /**
-     * Vérifie qu'on sélectionne bien la bille attrapée
-     * @param event : MouseEvent lié au click
-     * @param ball : bille que l'on cherche à attraper
-     * @return true : bonne bille
-     *         false : autre bille
-     */
-    private boolean isBallSelected(MouseEvent event, SimpleBallDTO ball) {
-        return getDistanceBetweenMouseAndBall(event, ball) <= ball.getRadius();
-    }
-
-    /**
-     * @return la distance entre la position de la sourie et la bille
-     */
-    private double getDistanceBetweenMouseAndBall(MouseEvent event, SimpleBallDTO ball) {
-        return Math.hypot(event.getX() - ball.getPosition().x, event.getY() - ball.getPosition().y);
-    }
+//    /**
+//     * Permet au programme de spécifier ce qu'il doit faire lors d'un interaction avec la sourie
+//     */
+//    private void manageMouseListener() {
+//        AtomicReference<SimpleBallDTO> ballSelect = new AtomicReference<>();
+//        Platform.runLater(() -> {
+//            background.setOnMousePressed(mouseEvent -> ballSelect.set(listBalls.stream().filter(ball -> isBallSelected(mouseEvent, ball)).findFirst().orElse(null)));
+//            background.setOnMouseReleased(mouseEvent -> {
+//                if (ballSelect.get() != null) {
+//                    DataSendingManager.sendJSONObject(ballSelect.get().getId(), new Vecteur(mouseEvent.getX(), mouseEvent.getY()));
+//                }
+//            });
+//        });
+//    }
+//
+//    /**
+//     * Vérifie qu'on sélectionne bien la bille attrapée
+//     * @param event : MouseEvent lié au click
+//     * @param ball : bille que l'on cherche à attraper
+//     * @return true : bonne bille
+//     *         false : autre bille
+//     */
+//    private boolean isBallSelected(MouseEvent event, SimpleBallDTO ball) {
+//        return getDistanceBetweenMouseAndBall(event, ball) <= ball.getRadius();
+//    }
+//
+//    /**
+//     * @return la distance entre la position de la sourie et la bille
+//     */
+//    private double getDistanceBetweenMouseAndBall(MouseEvent event, SimpleBallDTO ball) {
+//        return Math.hypot(event.getX() - ball.getPosition().x, event.getY() - ball.getPosition().y);
+//    }
 }

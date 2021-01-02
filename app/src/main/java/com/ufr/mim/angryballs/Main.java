@@ -1,6 +1,5 @@
 package com.ufr.mim.angryballs;
 
-import com.ufr.mim.angryballs.controllers.ControllerFrame;
 import com.ufr.mim.angryballs.utils.ConstantsUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

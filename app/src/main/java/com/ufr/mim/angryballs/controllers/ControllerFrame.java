@@ -67,6 +67,8 @@ public class ControllerFrame implements Initializable {
 
             service = new MovingBallsScheduledService(listBall, deltaT, background.getWidth(), background.getHeight(), drawBallsWithFx);
             service.setPeriod(Duration.millis(deltaT));
+            service.setRestartOnFailure(true);
+            service.setMaximumFailureCount(10);
             service.start();
         }
     }
